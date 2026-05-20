@@ -1,0 +1,221 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+  const studies = await getCollection("case-studies");
+  return studies.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<"case-studies">;
+}
+
+const { entry } = Astro.props;
+const {
+  title,
+  clientUrl,
+  stack,
+  status,
+  problem,
+  technicalWin,
+  stats,
+  engagement,
+  shipped,
+  imageCaption,
+} = entry.data;
+
+const slug = entry.slug;
+const pageUrl = new URL(`/work/${slug}`, Astro.site).href;
+const summaryLine = stats.map((s) => `${s.k} ${s.v}`).join(" · ");
+const copySummary = `${title.toUpperCase()}\n${summaryLine}\n${pageUrl}`;
+
+const heroStats = [
+  ...stats.slice(0, 3),
+  { k: "Status", v: status.split("·")[0].trim(), sub: status.includes("·") ? status.split("·").slice(1).join("·").trim() : undefined },
+];
+---
+
+<Base title={`${title} · Darren Hundt`} description={technicalWin}>
+  <section class="cs-hero">
+    <div class="container-wide">
+      <nav class="cs-crumbs" aria-label="Breadcrumb">
+        <a href="/">~</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <a href="/#work">work</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">{slug}</span>
+      </nav>
+
+      <h1 class="cs-title">{title}</h1>
+      <p class="cs-sub">{technicalWin}</p>
+
+      <div class="cs-stat-header" role="list">
+        {heroStats.map((s) => (
+          <div class="cs-stat" role="listitem">
+            <div class="k">{s.k}</div>
+            <div class={`v${s.highlight ? ` ${s.highlight}` : ""}`}>{s.v}</div>
+            {s.sub && <div class="sub">{s.sub}</div>}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="container-wide">
+    <div class="cs-body">
+      <div>
+        <div class="cs-section">
+          <h2 class="cs-h2">The brief</h2>
+          <p class="cs-p">{problem}</p>
+        </div>
+
+        <div
+          class="cs-shot ph"
+          role="img"
+          aria-label={`${title} — screenshot placeholder`}
+        >
+          <div class="ph-tag">screenshot · hero</div>
+          <div class="ph-caption">
+            <span>{imageCaption ?? `${slug}-hero.png`}</span>
+            <span>16:9</span>
+          </div>
+        </div>
+
+        <div class="cs-section">
+          <h2 class="cs-h2">What I actually changed</h2>
+          <p class="cs-p">{technicalWin}</p>
+        </div>
+
+        <div class="cs-section">
+          <h2 class="cs-h2">Outcome</h2>
+          <p class="cs-p">
+            {stats
+              .map((s) => `${s.k}: ${s.v}${s.sub ? ` (${s.sub})` : ""}`)
+              .join(" · ")}
+          </p>
+        </div>
+      </div>
+
+      <aside class="cs-aside">
+        <div class="cs-aside-card">
+          <div class="cs-aside-h">Project facts</div>
+          <div class="cs-aside-kv">
+            <div class="row">
+              <span class="k">Stack</span>
+              <span class="v">{stack.join(" · ")}</span>
+            </div>
+            <div class="row">
+              <span class="k">Store</span>
+              <span class="v">
+                <a href={`https://${clientUrl}`} target="_blank" rel="noopener noreferrer">
+                  {clientUrl}
+                </a>
+              </span>
+            </div>
+            <div class="row">
+              <span class="k">Status</span>
+              <span class="v">{status}</span>
+            </div>
+            {engagement && (
+              <div class="row">
+                <span class="k">Engagement</span>
+                <span class="v">{engagement}</span>
+              </div>
+            )}
+            {shipped && (
+              <div class="row">
+                <span class="k">Shipped</span>
+                <span class="v">{shipped}</span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div class="cs-aside-card">
+          <div class="cs-aside-h">Outcome metrics</div>
+          <div class="cs-aside-kv">
+            {stats.map((s) => (
+              <div class="row">
+                <span class="k">{s.k}</span>
+                <span class="v">
+                  {s.v}
+                  {s.sub ? ` · ${s.sub}` : ""}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="cs-aside-card">
+          <div class="cs-aside-h">Share / save</div>
+          <div class="cs-share-actions">
+            <button
+              type="button"
+              class="copy-btn"
+              data-copy={pageUrl}
+              aria-label="Copy link for Upwork"
+            >
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="12" height="12" aria-hidden="true">
+                <rect x="4" y="4" width="9" height="9" rx="1.5"></rect>
+                <path d="M3 11V4a1 1 0 0 1 1-1h7"></path>
+              </svg>
+              Copy link for Upwork
+            </button>
+            <button
+              type="button"
+              class="copy-btn"
+              data-copy={copySummary}
+              aria-label="Copy case summary"
+            >
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="12" height="12" aria-hidden="true">
+                <rect x="4" y="4" width="9" height="9" rx="1.5"></rect>
+                <path d="M3 11V4a1 1 0 0 1 1-1h7"></path>
+              </svg>
+              Copy case summary
+            </button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .cs-share-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .cs-share-actions .copy-btn {
+    width: 100%;
+    justify-content: flex-start;
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>(".copy-btn[data-copy]").forEach((btn) => {
+    const defaultLabel = btn.textContent?.trim() ?? "Copy";
+    const svgCopy = btn.querySelector("svg")!.outerHTML;
+    const svgCheck = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" width="12" height="12" aria-hidden="true"><path d="m3 8.5 3.5 3.5L13 5"></path></svg>`;
+
+    btn.addEventListener("click", () => {
+      const text = btn.dataset.copy ?? "";
+      try {
+        if (navigator.clipboard && window.isSecureContext !== false) {
+          navigator.clipboard.writeText(text).catch(() => {});
+        }
+      } catch (_) {}
+
+      btn.classList.add("copied");
+      btn.innerHTML = `${svgCheck} Copied`;
+      setTimeout(() => {
+        btn.classList.remove("copied");
+        btn.innerHTML = `${svgCopy} ${defaultLabel}`;
+      }, 1600);
+    });
+  });
+</script>
