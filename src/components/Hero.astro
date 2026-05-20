@@ -1,0 +1,92 @@
+---
+import siteConfig from "@/data/site-config.json";
+---
+
+<section class="hero topo" aria-labelledby="hero-heading">
+  <div class="container">
+
+    <!-- Availability pill — JS hydrates "Available" / "After hours" -->
+    <span class="hero-eyebrow">
+      <span class="dot" aria-hidden="true"></span>
+      <span>
+        <span id="hero-avail"></span>
+        {" "}· {siteConfig.slotsLeft} sprint slots left · {siteConfig.quarterLabel}
+      </span>
+    </span>
+
+    <h1 id="hero-heading">
+      I solve the Shopify problems <span class="accent">agencies&nbsp;can't.</span>
+    </h1>
+
+    <p class="hero-sub">
+      High-stakes performance, architecture, and rescue work — delivered directly by
+      the engineer writing the code.
+    </p>
+
+    <div class="hero-actions">
+      <a href="/#contact" class="btn btn-primary">
+        Apply for a sprint
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13" aria-hidden="true">
+          <path d="M3 8h10m-4-4 4 4-4 4"></path>
+        </svg>
+      </a>
+      <a href="https://sendspark.com/share/iy0s51u02ohafynd" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 16 16" fill="currentColor" width="13" height="13" aria-hidden="true">
+          <path d="M5 3.5v9l8-4.5z"></path>
+        </svg>
+        Watch a recent build walkthrough
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="k">Years shipping Shopify</div>
+        <div class="v">11<span class="unit">+</span></div>
+      </div>
+      <div class="hero-stat">
+        <div class="k">Stores in production</div>
+        <div class="v">25<span class="unit">+</span></div>
+      </div>
+      <!-- HERO STAT 3 · TASKS.md #01
+           Currently: single-project figure from Copper Cow Coffee ADA work.
+           Replace with a universal metric before launch. -->
+      <div class="hero-stat">
+        <div class="k">Accessibility fixes</div>
+        <div class="v">150<span class="unit">+</span></div>
+      </div>
+      <div class="hero-stat">
+        <div class="k">North Texas · CST</div>
+        <!-- aria-hidden: live clock — announcing every second to AT is disruptive -->
+        <div class="v" id="hero-time" aria-hidden="true">—</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  function tick() {
+    const now  = new Date();
+    const hour = parseInt(
+      now.toLocaleString("en-US", { timeZone: "America/Chicago", hour: "numeric", hour12: false }),
+      10,
+    );
+    const day    = now.toLocaleDateString("en-US", { timeZone: "America/Chicago", weekday: "short" });
+    const online = hour >= 9 && hour < 17 && day !== "Sat" && day !== "Sun";
+
+    const availEl = document.getElementById("hero-avail");
+    const timeEl  = document.getElementById("hero-time");
+
+    if (availEl) availEl.textContent = online ? "Available" : "After hours";
+    if (timeEl) {
+      timeEl.textContent = now.toLocaleTimeString("en-US", {
+        timeZone: "America/Chicago",
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+      });
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
+</script>

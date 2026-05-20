@@ -1,0 +1,69 @@
+---
+// Static shell — JS below hydrates time and status on the client
+---
+
+<div class="texas-badge">
+  <div class="texas-top">
+    <div class="texas-icon" aria-hidden="true">TX</div>
+    <div>
+      <div class="texas-title">Operating out of North Texas</div>
+      <div class="texas-sub">Real person. Real timezone. Real phone.</div>
+    </div>
+  </div>
+  <div class="texas-row">
+    <span class="k">Local time (CST)</span>
+    <span class="v live" id="texas-time" aria-live="polite">—</span>
+  </div>
+  <div class="texas-row">
+    <span class="k">Status</span>
+    <span class="v" id="texas-status" aria-live="polite">—</span>
+  </div>
+  <div class="texas-row">
+    <span class="k">Call hours</span>
+    <span class="v">9 AM – 5 PM CST · Mon–Thu</span>
+  </div>
+  <div class="texas-row">
+    <span class="k">Based</span>
+    <span class="v">North Texas</span>
+  </div>
+</div>
+
+<script>
+  function tick() {
+    const now = new Date();
+
+    const time = now.toLocaleTimeString("en-US", {
+      timeZone: "America/Chicago",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+
+    // hour12: false gives 0–23 in Chicago time
+    const hour = parseInt(
+      now.toLocaleString("en-US", {
+        timeZone: "America/Chicago",
+        hour: "numeric",
+        hour12: false,
+      }),
+      10,
+    );
+    const day = now.toLocaleDateString("en-US", {
+      timeZone: "America/Chicago",
+      weekday: "short",
+    });
+    const online = hour >= 9 && hour < 17 && day !== "Sat" && day !== "Sun";
+
+    const timeEl = document.getElementById("texas-time");
+    const statusEl = document.getElementById("texas-status");
+
+    if (timeEl) timeEl.textContent = time;
+    if (statusEl) {
+      statusEl.textContent = online ? "Available for calls" : "After hours · DMs open";
+      statusEl.className = online ? "v ok" : "v";
+    }
+  }
+
+  tick();
+  setInterval(tick, 1000);
+</script>

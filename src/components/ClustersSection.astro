@@ -1,0 +1,77 @@
+---
+const clusters = [
+  {
+    n:    "01",
+    name: "Shopify Performance",
+    href: "/blog/shopify-performance",
+    desc: "Core Web Vitals, theme audits, third-party tag offloading.",
+    count: 4,
+    articles: [
+      "Killing render-blocking apps without losing analytics",
+      "The 30-minute Lighthouse 98 checklist",
+    ],
+  },
+  {
+    n:    "02",
+    name: "Custom Liquid and Functions",
+    href: "/blog/custom-liquid-functions",
+    desc: "Sections, metaobjects, cart transforms, delivery customizations.",
+    count: 4,
+    articles: [
+      "Replacing the Shopify Bundles app with Cart Transform Functions",
+      "Metaobjects vs. metafields: when each one wins",
+    ],
+  },
+  {
+    n:    "03",
+    name: "Migrations and Integrations",
+    href: "/blog/migrations-integrations",
+    desc: "App migrations, subscription platform swaps, ReCharge integrations.",
+    count: 4,
+    articles: [
+      "ReCharge integration patterns that don't break your theme",
+      "Replacing Replo with native Shopify sections",
+    ],
+  },
+];
+---
+
+<section class="sec" id="topics" aria-labelledby="topics-heading">
+  <div class="container">
+
+    <div class="sec-head">
+      <div>
+        <div class="sec-eyebrow">Knowledge hub</div>
+        <h2 id="topics-heading">Skimmable technical writing on the things I actually ship.</h2>
+      </div>
+      <a href="/blog" class="sec-link">
+        All articles
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13" aria-hidden="true">
+          <path d="M5 11 11 5m0 0H6m5 0v5"></path>
+        </svg>
+      </a>
+    </div>
+
+    <div class="cluster-grid">
+      {clusters.map((c) => (
+        <div class="cluster">
+          <div class="cluster-h">
+            <span class="cluster-num">{c.n}</span>
+            <span class="cluster-count">{c.count} articles</span>
+          </div>
+          <div class="cluster-name">{c.name}</div>
+          <div class="cluster-desc">{c.desc}</div>
+          <div class="cluster-articles">
+            {c.articles.map((title) => (
+              <a href={c.href}>
+                <span class="arrow" aria-hidden="true">→</span>
+                {title}
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

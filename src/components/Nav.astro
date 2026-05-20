@@ -1,0 +1,181 @@
+---
+const { pathname } = Astro.url;
+
+const navLinks = [
+  { href: "/#work",    label: "Work" },
+  { href: "/#process", label: "Process" },
+  { href: "/blog",     label: "Knowledge hub" },
+  { href: "/#about",   label: "About" },
+];
+
+function isActive(href: string): boolean {
+  const base = href.split("#")[0];
+  if (base === "/") return pathname === "/";
+  return pathname === base || pathname.startsWith(base + "/");
+}
+---
+
+<nav class="nav" aria-label="Main navigation">
+  <div class="container-wide nav-inner">
+
+    <a href="/" class="brand">
+      <span class="brand-mark" aria-hidden="true">D</span>
+      <span class="brand-name">Darren</span>
+      <span class="brand-slash" aria-hidden="true">/</span>
+      <span class="brand-role">Shopify engineer</span>
+    </a>
+
+    <!-- Desktop links (hidden below 768px via CSS) -->
+    <div class="nav-links">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class={`nav-link${isActive(link.href) ? " active" : ""}`}
+        >
+          {link.label}
+        </a>
+      ))}
+      <a href="/#contact" class="nav-cta">
+        Apply for a sprint
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13" aria-hidden="true">
+          <path d="M3 8h10m-4-4 4 4-4 4"></path>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Hamburger button (visible below 768px only) -->
+    <button
+      class="nav-hamburger"
+      type="button"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+      aria-label="Open navigation menu"
+    >
+      <!-- 3-bar icon: shown when menu is closed -->
+      <svg class="icon-menu" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="20" height="14" aria-hidden="true">
+        <path d="M1 1h18M1 7h18M1 13h18"></path>
+      </svg>
+      <!-- X icon: shown when menu is open -->
+      <svg class="icon-close" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="14" height="14" aria-hidden="true">
+        <path d="M1 1l12 12M13 1L1 13"></path>
+      </svg>
+    </button>
+
+  </div>
+
+  <!--
+    Mobile nav panel — position: absolute so it drops below the sticky nav bar.
+    Visibility is toggled via .is-open class; the CSS transition delays
+    visibility:hidden until after the fade-out completes so the element is only
+    removed from the tab order once it's invisible.
+  -->
+  <div
+    id="mobile-nav"
+    class="mobile-nav"
+    aria-hidden="true"
+    aria-label="Navigation menu"
+  >
+    <div class="container-wide mobile-nav-inner">
+      {navLinks.map((link) => (
+        <a href={link.href} class="mobile-nav-link">{link.label}</a>
+      ))}
+      <a href="/#contact" class="mobile-nav-cta btn btn-primary">
+        Apply for a sprint
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13" aria-hidden="true">
+          <path d="M3 8h10m-4-4 4 4-4 4"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>(".nav-hamburger");
+  const menu = document.getElementById("mobile-nav");
+
+  // Guard: bail if the elements aren't in the DOM (non-mobile builds skip this script at runtime)
+  if (btn && menu) {
+    const isOpen = () => btn.getAttribute("aria-expanded") === "true";
+
+    // ─── Focus trap ─────────────────────────────────────────────────────────
+    // Cycle Tab/Shift+Tab through the menu's focusable elements only.
+    function setupTrap() {
+      const els = Array.from(
+        menu.querySelectorAll<HTMLElement>("a[href], button:not([disabled])"),
+      );
+      if (!els.length) return () => {};
+
+      function onKey(e: KeyboardEvent) {
+        if (e.key !== "Tab") return;
+        const idx = els.indexOf(document.activeElement as HTMLElement);
+        if (e.shiftKey) {
+          // Shift+Tab on first element → wrap to last
+          if (idx <= 0) { e.preventDefault(); els.at(-1)!.focus(); }
+        } else {
+          // Tab on last element → wrap to first
+          if (idx === els.length - 1) { e.preventDefault(); els[0].focus(); }
+        }
+      }
+
+      menu.addEventListener("keydown", onKey);
+      return () => menu.removeEventListener("keydown", onKey);
+    }
+
+    let removeTrap: (() => void) | null = null;
+
+    // ─── Open ────────────────────────────────────────────────────────────────
+    function open() {
+      btn.setAttribute("aria-expanded", "true");
+      btn.setAttribute("aria-label", "Close navigation menu");
+      menu.setAttribute("aria-hidden", "false");
+      menu.classList.add("is-open");
+      removeTrap = setupTrap();
+      // visibility: visible is immediate on open, so we can focus right away
+      requestAnimationFrame(() => menu.querySelector<HTMLElement>("a")?.focus());
+    }
+
+    // ─── Close ───────────────────────────────────────────────────────────────
+    // returnFocus: move keyboard focus back to hamburger button (true when
+    // closed via keyboard; false when closed by a mouse click elsewhere)
+    function close(returnFocus = true) {
+      btn.setAttribute("aria-expanded", "false");
+      btn.setAttribute("aria-label", "Open navigation menu");
+      menu.setAttribute("aria-hidden", "true");
+      menu.classList.remove("is-open");
+      removeTrap?.();
+      removeTrap = null;
+      if (returnFocus) btn.focus();
+    }
+
+    // ─── Toggle on hamburger click ────────────────────────────────────────────
+    btn.addEventListener("click", () => (isOpen() ? close() : open()));
+
+    // ─── Escape key ──────────────────────────────────────────────────────────
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && isOpen()) close();
+    });
+
+    // ─── Click outside ───────────────────────────────────────────────────────
+    // Use the nav element as the boundary so clicks on the hamburger
+    // button go through the toggle handler above, not here.
+    document.addEventListener("click", (e) => {
+      const nav = btn.closest(".nav");
+      if (isOpen() && !nav?.contains(e.target as Node)) close(false);
+    });
+
+    // ─── Close on link click ─────────────────────────────────────────────────
+    // Hash anchors navigate without a full page reload, so we close the
+    // menu manually. Cross-page links let the browser navigate (menu closes
+    // naturally on unload).
+    menu.querySelectorAll("a").forEach((a) =>
+      a.addEventListener("click", () => close(false)),
+    );
+
+    // ─── Close on resize above breakpoint ────────────────────────────────────
+    // Prevents a stale open menu if the user resizes to desktop width.
+    const mq = window.matchMedia("(max-width: 768px)");
+    mq.addEventListener("change", (e) => {
+      if (!e.matches && isOpen()) close(false);
+    });
+  }
+</script>

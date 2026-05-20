@@ -1,0 +1,77 @@
+---
+import TexasBadge from "./TexasBadge.astro";
+
+const workLinks = [
+  { href: "/work/tkees-performance-maintenance",        label: "TKEES · performance" },
+  { href: "/work/coppercow-subscription-ada",           label: "Copper Cow Coffee · ADA" },
+  { href: "/work/oftheancients-performance-sections",   label: "Of The Ancients · native" },
+  { href: "/work/savenors-maintenance-design",          label: "Savenor's Butcher · maintenance" },
+];
+
+const hubLinks = [
+  { href: "/blog/shopify-performance",          label: "Performance" },
+  { href: "/blog/custom-liquid-functions",      label: "Liquid & Functions" },
+  { href: "/blog/migrations-integrations",      label: "Migrations" },
+  { href: "/blog",                              label: "All tutorials" },
+];
+---
+
+<footer class="footer topo">
+  <div class="container-wide">
+    <div class="footer-grid">
+
+      <div>
+        <TexasBadge />
+      </div>
+
+      <div class="footer-col">
+        <h5>Work</h5>
+        <ul>
+          <li><a href="/#work">All case studies</a></li>
+          {workLinks.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Knowledge hub</h5>
+        <ul>
+          {hubLinks.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          {/* TODO: confirm business email before launch */}
+          <li><a href="mailto:darren@darrenshopify.dev">darren@darrenshopify.dev</a></li>
+          {/* TODO: confirm phone display preference before launch */}
+          <li><span class="muted" style="font-size: 13px; font-family: var(--mono);">+1 (214) ███-████</span></li>
+          <li><a href="https://www.upwork.com/freelancers/~darren" target="_blank" rel="noopener noreferrer">Upwork · top-rated plus</a></li>
+          <li><a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bot">
+      <div>© 2026 Darren Hundt · North Texas · No agency, no PM.</div>
+      <div class="right">
+        <a href="/colophon">colophon</a>
+        <a href="/uses">uses</a>
+        <a href="/rss.xml">rss</a>
+        {/* Visually unobtrusive — unadvertised, not in sitemap */}
+        <a href="/_internal" class="dash-trigger" title="Internal use only">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="10" height="10" aria-hidden="true">
+            <rect x="3" y="7" width="10" height="7" rx="1"></rect>
+            <path d="M5 7V5a3 3 0 0 1 6 0v2"></path>
+          </svg>
+          _internal
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

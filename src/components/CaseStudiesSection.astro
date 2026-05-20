@@ -1,0 +1,173 @@
+---
+const cases = [
+  {
+    id: "tkees-performance-maintenance",
+    title: "TKEES · ongoing performance and maintenance",
+    stack: ["Liquid", "Vanilla JS", "Klaviyo"],
+    problem:
+      "A Klaviyo defer race condition was causing duplicate SDK loads on every page, degrading performance and corrupting event tracking. The issue had been missed by previous developers.",
+    solution:
+      "Diagnosed and resolved the race condition, eliminated duplicate SDK loads, and restored clean Klaviyo event tracking. Ongoing theme maintenance and design work for a premium global footwear brand.",
+    stats: [
+      { k: "Duplicate SDK loads", v: "Eliminated" },
+      { k: "Klaviyo events",      v: "Restored"   },
+      { k: "Status",              v: "Retainer"   },
+    ],
+    status: "Active maintenance",
+  },
+  {
+    id: "coppercow-subscription-ada",
+    title: "Copper Cow Coffee · subscription feature and ADA overhaul",
+    stack: ["Liquid", "Vanilla JS", "ReCharge"],
+    problem:
+      "No accessible path to subscription add-to-cart from collection or featured product carousels. Site also had significant WCAG 2.1 AA compliance gaps.",
+    solution:
+      "Engineered a custom subscription quick-add feature built directly into product carousels, exposing frequency options for immediate add-to-cart without leaving the page. Completed a full ADA/WCAG 2.1 AA accessibility overhaul across the theme.",
+    stats: [
+      { k: "Accessibility fixes", v: "150+"       },
+      { k: "Theme files touched", v: "32"          },
+      { k: "Standard",            v: "WCAG 2.1 AA" },
+    ],
+    status: "Shipped · ongoing",
+  },
+  {
+    id: "oftheancients-performance-sections",
+    title: "Of The Ancients · performance audit and native rebuild",
+    stack: ["Liquid", "Vanilla JS"],
+    problem:
+      "A high-traffic landing page was built on Replo, introducing a third-party page builder dependency and hurting load performance. Site also had accumulated performance debt across the theme.",
+    solution:
+      "Rebuilt the Replo landing page using native Shopify sections only, eliminating the page builder dependency entirely. Completed a full PageSpeed audit with targeted fixes across the theme.",
+    stats: [
+      { k: "Replo dependency", v: "Removed"     },
+      { k: "Page builder",     v: "Eliminated"  },
+      { k: "Sections",         v: "Native only" },
+    ],
+    status: "Shipped · ongoing",
+  },
+  {
+    id: "savenors-maintenance-design",
+    title: "Savenor's Butcher · ongoing maintenance and design",
+    stack: ["Liquid", "Vanilla JS"],
+    problem:
+      "Established specialty food brand needed a reliable ongoing development partner for theme maintenance, design iterations, and feature work without agency overhead or turnaround lag.",
+    solution:
+      "Ongoing maintenance and design work as a direct solo developer. Fast turnaround, no handoff layers, direct access to the person writing the code.",
+    stats: [
+      { k: "Agency overhead",  v: "None"    },
+      { k: "Developer access", v: "Direct"  },
+      { k: "Status",           v: "Retainer"},
+    ],
+    status: "Active maintenance",
+  },
+];
+---
+
+<section class="sec" id="work" aria-labelledby="work-heading">
+  <div class="container">
+
+    <div class="sec-head">
+      <div>
+        <div class="sec-eyebrow">Selected work</div>
+        <h2 id="work-heading">Real stores. Real outcomes.</h2>
+      </div>
+    </div>
+
+    <div class="case-grid">
+      {cases.map((c, ci) => {
+        const blurb = `${c.title.toUpperCase()}
+Stack: ${c.stack.join(" / ")}
+Outcome: ${c.stats.map(s => `${s.k} ${s.v}`).join(", ")}
+Read: darrenshopify.dev/work/${c.id}`;
+
+        return (
+          <article class="case-card">
+
+            <div class="case-thumb ph" role="img" aria-label={`${c.title} — hero image placeholder`}>
+              <div class="ph-caption">
+                <span>{c.id}-hero.png</span>
+                <span>{c.stack.slice(0, 2).join(" · ")}</span>
+              </div>
+            </div>
+
+            <div class="case-body">
+              <div class="case-title">{c.title}</div>
+              <div class="ps-row">
+                <div class="ps-key">Problem</div>
+                <div class="ps-val">{c.problem}</div>
+              </div>
+              <div class="ps-row">
+                <div class="ps-key">Technical win</div>
+                <div class="ps-val">{c.solution}</div>
+              </div>
+            </div>
+
+            <div class="case-stats">
+              {c.stats.map((s, i) => (
+                <div class={`case-stat${i === 0 ? " primary" : ""}`}>
+                  <div class="k">{s.k}</div>
+                  <div class="v">{s.v}</div>
+                </div>
+              ))}
+            </div>
+
+            <div class="case-actions">
+              <div class="left">{c.status}</div>
+              <div class="right">
+                <button
+                  class="copy-btn"
+                  data-copy={blurb}
+                  aria-label={`Copy Upwork blurb for ${c.title}`}
+                >
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="12" height="12" aria-hidden="true">
+                    <rect x="4" y="4" width="9" height="9" rx="1.5"></rect>
+                    <path d="M3 11V4a1 1 0 0 1 1-1h7"></path>
+                  </svg>
+                  Copy blurb
+                </button>
+                <a
+                  href={`/work/${c.id}`}
+                  class="copy-btn"
+                  aria-label={`Read case study: ${c.title}`}
+                >
+                  Read case
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="12" height="12" aria-hidden="true">
+                    <path d="M3 8h10m-4-4 4 4-4 4"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+          </article>
+        );
+      })}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>(".copy-btn[data-copy]").forEach((btn) => {
+    const svgCopy = btn.querySelector("svg")!.outerHTML;
+    const svgCheck = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" width="12" height="12" aria-hidden="true"><path d="m3 8.5 3.5 3.5L13 5"></path></svg>`;
+
+    btn.addEventListener("click", () => {
+      const text = btn.dataset.copy ?? "";
+      try {
+        if (navigator.clipboard && window.isSecureContext !== false) {
+          navigator.clipboard.writeText(text).catch(() => {});
+        }
+      } catch (_) {}
+
+      btn.classList.add("copied");
+      btn.innerHTML = `${svgCheck} Copied`;
+      btn.setAttribute("aria-label", btn.getAttribute("aria-label")!.replace("Copy", "Copied"));
+
+      setTimeout(() => {
+        btn.classList.remove("copied");
+        btn.innerHTML = `${svgCopy} Copy blurb`;
+        btn.setAttribute("aria-label", btn.getAttribute("aria-label")!.replace("Copied", "Copy"));
+      }, 1600);
+    });
+  });
+</script>

@@ -1,0 +1,48 @@
+---
+const steps = [
+  {
+    n:    "01",
+    name: "Free 5-min Loom audit",
+    desc: "I record a screen-share of your storefront's actual bottlenecks before we even talk price.",
+  },
+  {
+    n:    "02",
+    name: "Scoped fixed-bid quote",
+    desc: "One-page scope, fixed price, weekly demos. No retainers, no surprise change orders.",
+  },
+  {
+    n:    "03",
+    name: "Build in shared Slack",
+    desc: "I work in your channel. Daily commits, daily Looms. You see the work in flight.",
+  },
+  {
+    n:    "04",
+    name: "Hand-off + 30 days support",
+    desc: "Documented in your repo. Loom walkthrough of every change. Bug fixes for a month, free.",
+  },
+];
+---
+
+<section class="sec sec-feature" id="process" aria-labelledby="process-heading">
+  <div class="container">
+
+    <div class="feature-head">
+      <div class="sec-eyebrow">The human advantage</div>
+      <h2 class="feature-h" id="process-heading">
+        One engineer.
+        <span class="feature-mute">No agency. No PM layer. No junior on the code.</span>
+      </h2>
+    </div>
+
+    <div class="process">
+      {steps.map((s) => (
+        <div class="process-step">
+          <div class="process-num">{s.n}</div>
+          <div class="process-name">{s.name}</div>
+          <div class="process-desc">{s.desc}</div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
