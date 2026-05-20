@@ -1,0 +1,57 @@
+---
+const testimonials = [
+  {
+    avatar: "TK",
+    name:   "[Name]",
+    role:   "[Title] · TKEES",
+    quote:
+      "Darren found the Klaviyo issue that had been missed for months. Fixed the same week. First developer who explained what was actually wrong in plain English.",
+  },
+  {
+    avatar: "CC",
+    name:   "[Name]",
+    role:   "[Title] · Copper Cow Coffee",
+    quote:
+      "He rebuilt our subscription carousel feature and handled the full ADA audit at the same time. Clean code, no hand-holding, done when he said it would be done.",
+  },
+  {
+    avatar: "OA",
+    name:   "[Name]",
+    role:   "[Title] · Of The Ancients",
+    quote:
+      "We needed a Replo page rebuilt in native Shopify. Darren delivered it fast and our PageSpeed score jumped significantly. No agency, no middleman, just the work.",
+  },
+];
+---
+
+<section class="sec" id="words" aria-labelledby="words-heading">
+  <div class="container">
+
+    <div class="sec-head">
+      <div>
+        <div class="sec-eyebrow">Words from founders</div>
+        <h2 id="words-heading">
+          What it sounds like when there's no agency between you and the work.
+        </h2>
+      </div>
+    </div>
+
+    <div class="t-grid">
+      {testimonials.map((t) => (
+        <article class="t-card">
+          {/* ⚠️ PLACEHOLDER — replace quote with real client testimonial before launch (SEED_CONTENT.md) */}
+          <div class="t-quote">{t.quote}</div>
+          <div class="t-author">
+            <div class="t-avatar" aria-hidden="true">{t.avatar}</div>
+            <div>
+              {/* ⚠️ PLACEHOLDER — replace [Name] and [Title] with permissioned attribution */}
+              <div class="t-name">{t.name}</div>
+              <div class="t-role">{t.role}</div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+  </div>
+</section>
