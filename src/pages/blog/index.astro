@@ -1,0 +1,125 @@
+---
+import Base from "@/layouts/Base.astro";
+import {
+  getPublishedPosts,
+  formatPublishDate,
+  BLOG_CLUSTERS,
+  CLUSTER_ORDER,
+  clusterFilterHref,
+  type BlogClusterId,
+} from "@/lib/blog";
+
+const published = await getPublishedPosts();
+const byCluster = Object.fromEntries(
+  CLUSTER_ORDER.map((id) => [
+    id,
+    published.filter((p) => p.data.cluster === id),
+  ]),
+) as Record<BlogClusterId, typeof published>;
+---
+
+<Base
+  title="Knowledge hub · Darren Hundt"
+  description="Technical tutorials on Shopify performance, Liquid, Functions, and migrations."
+>
+  <script is:inline>
+    (function () {
+      var p = new URLSearchParams(location.search);
+      var c = p.get("cluster");
+      if (!c || ["performance", "liquid-functions", "migrations"].indexOf(c) === -1) return;
+      document.documentElement.dataset.blogCluster = c;
+    })();
+  </script>
+
+  <section class="sec blog-index-hero">
+    <div class="container">
+      <div class="sec-eyebrow">Knowledge hub</div>
+      <h1 class="blog-index-title">Tutorials on what I actually ship.</h1>
+      <p class="blog-index-lede">
+        Skimmable technical writing — performance rescues, custom Liquid, and
+        integration work for Shopify 2.0 stores.
+      </p>
+      <div class="blog-index-filters" role="tablist" aria-label="Filter by topic">
+        <a href="/blog" class="blog-filter active" data-cluster="all">All topics</a>
+        {CLUSTER_ORDER.map((id) => (
+          <a href={clusterFilterHref(id)} class="blog-filter" data-cluster={id}>
+            {BLOG_CLUSTERS[id].name}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec blog-index-list">
+    <div class="container">
+      {CLUSTER_ORDER.map((id) => {
+        const meta = BLOG_CLUSTERS[id];
+        const posts = byCluster[id];
+        return (
+          <section
+            class="blog-cluster-section"
+            id={id}
+            data-cluster={id}
+            aria-labelledby={`cluster-${id}`}
+          >
+            <div class="blog-cluster-head">
+              <span class="cluster-num">{meta.n}</span>
+              <h2 id={`cluster-${id}`}>{meta.name}</h2>
+              <p>{meta.description}</p>
+            </div>
+
+            {posts.length > 0 ? (
+              <ul class="blog-article-list">
+                {posts.map((post) => (
+                  <li>
+                    <a href={`/blog/${post.slug}`} class="blog-article-card">
+                      <span class="blog-article-title">{post.data.title}</span>
+                      <span class="blog-article-meta">
+                        <time datetime={post.data.publishDate.toISOString()}>
+                          {formatPublishDate(post.data.publishDate)}
+                        </time>
+                        {post.data.tags.length > 0 && (
+                          <>
+                            <span class="sep">·</span>
+                            <span>{post.data.tags.slice(0, 2).join(", ")}</span>
+                          </>
+                        )}
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p class="blog-empty">
+                No published articles in this cluster yet. Drafts are in progress.
+              </p>
+            )}
+          </section>
+        );
+      })}
+
+      {published.length === 0 && (
+        <p class="blog-empty blog-empty-global">
+          All seed articles are still drafts. Set <code class="inline-code">draft: false</code> in
+          <code class="inline-code">src/content/blog/</code> when a tutorial is ready to publish.
+        </p>
+      )}
+    </div>
+  </section>
+</Base>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const cluster = params.get("cluster");
+  const valid = ["performance", "liquid-functions", "migrations"];
+
+  if (cluster && valid.includes(cluster)) {
+    document.querySelectorAll<HTMLElement>(".blog-cluster-section").forEach((section) => {
+      const match = section.dataset.cluster === cluster;
+      section.hidden = !match;
+      section.style.display = match ? "" : "none";
+    });
+
+    document.documentElement.dataset.blogCluster = cluster;
+  }
+</script>

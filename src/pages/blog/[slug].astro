@@ -1,0 +1,139 @@
+---
+import Base from "@/layouts/Base.astro";
+import {
+  getPublishedPosts,
+  getPostsByCluster,
+  getClusterNeighbors,
+  estimateReadMinutes,
+  formatPublishDate,
+  clusterLabel,
+  clusterFilterHref,
+  type BlogEntry,
+} from "@/lib/blog";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const all = await getCollection("blog");
+  const published = all.filter((e) => e.data.draft !== true);
+  return published.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: BlogEntry;
+}
+
+const { entry } = Astro.props;
+const { title, description, publishDate, cluster, tags, readMinutes } =
+  entry.data;
+
+const published = await getPublishedPosts();
+const clusterPosts = await getPostsByCluster(cluster);
+const { prev, next } = getClusterNeighbors(entry, published);
+const minutes = readMinutes ?? estimateReadMinutes(entry.body);
+const { Content, headings } = await entry.render();
+
+const hubBackHref = clusterFilterHref(cluster);
+---
+
+<Base
+  title={`${title} · Darren Hundt`}
+  description={description}
+>
+  <section class="container blog-article-wrap">
+    <div class="tut-layout">
+      <aside class="tut-sidebar" aria-label="Cluster navigation">
+        <div class="tut-sb-eyebrow">In this cluster</div>
+        <nav class="tut-cluster-nav">
+          {clusterPosts.map((post) => (
+            <a
+              href={`/blog/${post.slug}`}
+              class:list={{ active: post.slug === entry.slug }}
+              aria-current={post.slug === entry.slug ? "page" : undefined}
+            >
+              {post.data.title}
+            </a>
+          ))}
+        </nav>
+      </aside>
+
+      <article class="tut-main">
+        <div class="tut-meta">
+          <a href={hubBackHref} class="mono">← back to hub</a>
+          <span class="sep" aria-hidden="true">·</span>
+          <a href={hubBackHref} class="blog-cluster-tag">{clusterLabel(cluster)}</a>
+          <span class="sep" aria-hidden="true">·</span>
+          <time datetime={publishDate.toISOString()}>{formatPublishDate(publishDate)}</time>
+          <span class="sep" aria-hidden="true">·</span>
+          <span>{minutes} min read</span>
+        </div>
+
+        <h1 class="tut-title">{title}</h1>
+        <p class="tut-lede">{description}</p>
+
+        {tags.length > 0 && (
+          <ul class="blog-tags" aria-label="Tags">
+            {tags.map((tag) => (
+              <li><span class="blog-tag">{tag}</span></li>
+            ))}
+          </ul>
+        )}
+
+        <div class="tut-prose">
+          <Content />
+        </div>
+
+        <div class="tut-callout">
+          <div class="ic" aria-hidden="true">→</div>
+          <div>
+            <h4>Need this implemented on your store?</h4>
+            <p>
+              I handle performance, Liquid, and integration work as a solo developer in
+              North Texas — fixed bid, free Loom audit first, direct access to the person
+              writing the code.
+            </p>
+            <a href="/#contact" class="cta">
+              Apply for a sprint
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="12" height="12" aria-hidden="true">
+                <path d="M3 8h10m-4-4 4 4-4 4"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <nav class="tut-pager" aria-label="Article navigation">
+          {prev ? (
+            <a href={`/blog/${prev.slug}`} class="tut-pager-link prev">
+              <span class="k">Previous</span>
+              <span class="v">{prev.data.title}</span>
+            </a>
+          ) : (
+            <span class="tut-pager-link prev disabled" aria-hidden="true"></span>
+          )}
+          <a href="/blog" class="tut-pager-hub">Knowledge hub</a>
+          {next ? (
+            <a href={`/blog/${next.slug}`} class="tut-pager-link next">
+              <span class="k">Next</span>
+              <span class="v">{next.data.title}</span>
+            </a>
+          ) : (
+            <span class="tut-pager-link next disabled" aria-hidden="true"></span>
+          )}
+        </nav>
+      </article>
+
+      {headings.length > 0 && (
+        <aside class="tut-toc" aria-label="On this page">
+          <div class="tut-toc-h">On this page</div>
+          {headings
+            .filter((h) => h.depth >= 2 && h.depth <= 3)
+            .map((h) => (
+              <a href={`#${h.slug}`}>{h.text}</a>
+            ))}
+        </aside>
+      )}
+    </div>
+  </section>
+</Base>

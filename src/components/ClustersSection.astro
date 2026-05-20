@@ -1,39 +1,15 @@
 ---
-const clusters = [
-  {
-    n:    "01",
-    name: "Shopify Performance",
-    href: "/blog/shopify-performance",
-    desc: "Core Web Vitals, theme audits, third-party tag offloading.",
-    count: 4,
-    articles: [
-      "Killing render-blocking apps without losing analytics",
-      "The 30-minute Lighthouse 98 checklist",
-    ],
-  },
-  {
-    n:    "02",
-    name: "Custom Liquid and Functions",
-    href: "/blog/custom-liquid-functions",
-    desc: "Sections, metaobjects, cart transforms, delivery customizations.",
-    count: 4,
-    articles: [
-      "Replacing the Shopify Bundles app with Cart Transform Functions",
-      "Metaobjects vs. metafields: when each one wins",
-    ],
-  },
-  {
-    n:    "03",
-    name: "Migrations and Integrations",
-    href: "/blog/migrations-integrations",
-    desc: "App migrations, subscription platform swaps, ReCharge integrations.",
-    count: 4,
-    articles: [
-      "ReCharge integration patterns that don't break your theme",
-      "Replacing Replo with native Shopify sections",
-    ],
-  },
-];
+import { getCollection } from "astro:content";
+import {
+  BLOG_CLUSTERS,
+  CLUSTER_ORDER,
+  clusterFilterHref,
+  findPostByTitle,
+  isPublished,
+} from "@/lib/blog";
+
+const allPosts = await getCollection("blog");
+const published = allPosts.filter(isPublished);
 ---
 
 <section class="sec" id="topics" aria-labelledby="topics-heading">
@@ -53,25 +29,57 @@ const clusters = [
     </div>
 
     <div class="cluster-grid">
-      {clusters.map((c) => (
-        <div class="cluster">
-          <div class="cluster-h">
-            <span class="cluster-num">{c.n}</span>
-            <span class="cluster-count">{c.count} articles</span>
+      {CLUSTER_ORDER.map((id) => {
+        const c = BLOG_CLUSTERS[id];
+        const previews = c.seedArticles.slice(0, 2);
+        const publishedInCluster = published.filter((p) => p.data.cluster === id).length;
+
+        return (
+          <div class="cluster">
+            <a href={clusterFilterHref(id)} class="cluster-main-link">
+              <div class="cluster-h">
+                <span class="cluster-num">{c.n}</span>
+                <span class="cluster-count">
+                  {publishedInCluster > 0
+                    ? `${publishedInCluster} published`
+                    : `${c.seedArticles.length} planned`}
+                </span>
+              </div>
+              <div class="cluster-name">{c.name}</div>
+              <div class="cluster-desc">{c.description}</div>
+            </a>
+            <div class="cluster-articles">
+              {previews.map((title) => {
+                const post = findPostByTitle(allPosts, title);
+                const href = post && isPublished(post)
+                  ? `/blog/${post.slug}`
+                  : clusterFilterHref(id);
+
+                return (
+                  <a href={href}>
+                    <span class="arrow" aria-hidden="true">→</span>
+                    {title}
+                  </a>
+                );
+              })}
+            </div>
           </div>
-          <div class="cluster-name">{c.name}</div>
-          <div class="cluster-desc">{c.desc}</div>
-          <div class="cluster-articles">
-            {c.articles.map((title) => (
-              <a href={c.href}>
-                <span class="arrow" aria-hidden="true">→</span>
-                {title}
-              </a>
-            ))}
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
 
   </div>
 </section>
+
+<style>
+  .cluster-main-link {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    text-decoration: none;
+    color: inherit;
+  }
+  .cluster-main-link:hover .cluster-name {
+    color: var(--accent);
+  }
+</style>

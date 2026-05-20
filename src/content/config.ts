@@ -7,7 +7,21 @@ const caseStudyStat = z.object({
   highlight: z.enum(["up", "ok"]).optional(),
 });
 
+const blogCluster = z.enum(["performance", "liquid-functions", "migrations"]);
+
 export const collections = {
+  blog: defineCollection({
+    type: "content",
+    schema: z.object({
+      title: z.string(),
+      description: z.string(),
+      publishDate: z.coerce.date(),
+      cluster: blogCluster,
+      tags: z.array(z.string()).default([]),
+      draft: z.boolean().default(true),
+      readMinutes: z.number().int().positive().optional(),
+    }),
+  }),
   "case-studies": defineCollection({
     type: "content",
     schema: z.object({
