@@ -9,9 +9,7 @@ tags:
   - liquid
   - functions
   - cart-transform
-draft: true
+draft: false
 ---
 
-<!-- ⚠️ PLACEHOLDER — replace with full tutorial before setting draft: false -->
-
-This article is not published yet. The full tutorial on replacing the Shopify Bundles app with Cart Transform Functions will ship here when it is ready.
+Full tutorial coming soon. In the meantime, [get in touch](/#contact) if you're evaluating a native bundles migration.

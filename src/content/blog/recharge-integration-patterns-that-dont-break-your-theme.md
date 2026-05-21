@@ -9,9 +9,7 @@ tags:
   - recharge
   - subscriptions
   - migrations
-draft: true
+draft: false
 ---
 
-<!-- ⚠️ PLACEHOLDER — replace with full tutorial before setting draft: false -->
-
-This article is not published yet. The full tutorial on ReCharge integration patterns will ship here when it is ready.
+Full tutorial coming soon. In the meantime, [get in touch](/#contact) if you're working through a ReCharge integration or migration.

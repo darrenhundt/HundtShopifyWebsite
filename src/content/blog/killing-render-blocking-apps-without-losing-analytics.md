@@ -9,9 +9,7 @@ tags:
   - performance
   - analytics
   - shopify
-draft: true
+draft: false
 ---
 
-<!-- ⚠️ PLACEHOLDER — replace with full tutorial before setting draft: false -->
-
-This article is not published yet. The full walkthrough for killing render-blocking apps without losing analytics will ship here when it is ready.
+Full tutorial coming soon. In the meantime, [get in touch](//#contact) if you're dealing with render-blocking scripts on your Shopify store.

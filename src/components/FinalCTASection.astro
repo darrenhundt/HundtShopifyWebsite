@@ -1,44 +1,228 @@
 ---
 import siteConfig from "@/data/site-config.json";
 
-const email = "darren@darrenshopify.dev";
-
+const email = "darrenhundt@gmail.com";
 const { slotsLeft, quarterLabel } = siteConfig;
-
-const slotsHeadline =
-  slotsLeft === 1
-    ? "One sprint slot left. Runs 3–4 weeks."
-    : slotsLeft === 2
-      ? "Two sprint slots left. Both are 3–4 weeks."
-      : `${slotsLeft} sprint slots left. Each is 3–4 weeks.`;
-
-const sprintMailto = `mailto:${email}?subject=${encodeURIComponent("Sprint application")}`;
-const emailMailto = `mailto:${email}`;
 ---
 
-<section class="sec sec--flush-top" id="contact" aria-labelledby="contact-heading">
+<section class="sec sec--flush-top contact-sec" id="contact" aria-labelledby="contact-heading">
   <div class="container">
-    <div class="final-cta">
-      <div>
+    <div class="contact-inner">
+
+      <div class="contact-head">
         <div class="sec-eyebrow">{quarterLabel} · booking</div>
-        <h3 id="contact-heading">{slotsHeadline}</h3>
-        <p>
+        <h2 id="contact-heading">
+          {slotsLeft === 1 ? (
+            <>One sprint slot left.</>
+          ) : slotsLeft === 2 ? (
+            <>Two sprint slots left.</>
+          ) : (
+            <>{slotsLeft} sprint slots left.</>
+          )}
+        </h2>
+        <p class="contact-sub">
           Send me your storefront URL and the one number you wish was better. I'll send back
           a 5-min Loom diagnosing the actual bottleneck — free, before either of us commits
           to anything.
         </p>
       </div>
-      <div class="actions">
-        <a href={sprintMailto} class="btn btn-primary">
-          Apply for a sprint
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13" aria-hidden="true">
-            <path d="M3 8h10m-4-4 4 4-4 4"></path>
-          </svg>
-        </a>
-        <a href={emailMailto} class="btn btn-ghost">
-          Email me directly
-        </a>
+
+      <!-- Netlify form — data-netlify="true" triggers Netlify Forms processing -->
+      <form
+        class="contact-form"
+        name="contact"
+        method="POST"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        novalidate
+      >
+        <input type="hidden" name="form-name" value="contact" />
+        <!-- honeypot: hidden from humans, catches bots -->
+        <p class="contact-honeypot" aria-hidden="true">
+          <label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+        </p>
+
+        <div class="contact-row">
+          <div class="contact-field">
+            <label for="cf-name" class="cf-label">Name</label>
+            <input
+              id="cf-name"
+              name="name"
+              type="text"
+              class="cf-input"
+              placeholder="Your name"
+              required
+              autocomplete="name"
+            />
+          </div>
+          <div class="contact-field">
+            <label for="cf-email" class="cf-label">Email</label>
+            <input
+              id="cf-email"
+              name="email"
+              type="email"
+              class="cf-input"
+              placeholder="you@yourstore.com"
+              required
+              autocomplete="email"
+            />
+          </div>
+        </div>
+
+        <div class="contact-field">
+          <label for="cf-url" class="cf-label">Store URL</label>
+          <input
+            id="cf-url"
+            name="store_url"
+            type="url"
+            class="cf-input"
+            placeholder="https://yourstore.com"
+            autocomplete="url"
+          />
+        </div>
+
+        <div class="contact-field">
+          <label for="cf-msg" class="cf-label">What number do you wish was better?</label>
+          <textarea
+            id="cf-msg"
+            name="message"
+            class="cf-input cf-textarea"
+            placeholder="e.g. PageSpeed is 38. Cart abandonment jumped after we added a new app. Subscriptions broke after the Dawn update."
+            rows="4"
+            required
+          ></textarea>
+        </div>
+
+        <div class="contact-actions">
+          <button type="submit" class="btn btn-primary contact-submit">
+            Apply for a sprint
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13" aria-hidden="true">
+              <path d="M3 8h10m-4-4 4 4-4 4"></path>
+            </svg>
+          </button>
+          <a href={`mailto:${email}`} class="btn btn-ghost">Email directly</a>
+        </div>
+      </form>
+
+      <!-- Shown after successful submission -->
+      <div class="contact-success" aria-live="polite" hidden>
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" width="20" height="20" aria-hidden="true">
+          <path d="M4 10.5 8 14.5 16 6.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <p>Got it — I'll send a Loom your way shortly.</p>
       </div>
+
     </div>
   </div>
 </section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>(".contact-form");
+  const success = document.querySelector<HTMLElement>(".contact-success");
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    try {
+      await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(data as unknown as Record<string, string>).toString(),
+      });
+      form.hidden = true;
+      if (success) success.hidden = false;
+    } catch {
+      // fall back to native submit if fetch fails
+      form.submit();
+    }
+  });
+</script>
+
+<style>
+  .contact-inner {
+    max-width: 680px;
+  }
+
+  .contact-head { margin-bottom: 40px; }
+  .contact-head h2 {
+    font-size: clamp(28px, 3vw, 40px);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin: 14px 0 0;
+    font-weight: 600;
+  }
+  .contact-sub {
+    margin: 16px 0 0;
+    color: var(--fg-mute);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 560px;
+  }
+
+  .contact-honeypot { display: none; }
+
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+
+  .contact-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .contact-field { display: flex; flex-direction: column; gap: 6px; }
+
+  .cf-label {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+
+  .cf-input {
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-family: var(--sans);
+    font-size: 13.5px;
+    color: var(--fg);
+    width: 100%;
+    transition: border-color 0.15s;
+    outline: none;
+  }
+  .cf-input::placeholder { color: var(--fg-dim-2); }
+  .cf-input:focus { border-color: var(--accent-line); }
+  .cf-input:focus-visible { outline: none; }
+
+  .cf-textarea { resize: vertical; min-height: 96px; line-height: 1.55; }
+
+  .contact-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+
+  .contact-submit { min-width: 180px; justify-content: center; }
+
+  .contact-success {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    color: var(--fg-mute);
+    font-size: 14px;
+  }
+  .contact-success svg { color: var(--ok); flex-shrink: 0; }
+  .contact-success p { margin: 0; }
+
+  @media (max-width: 540px) {
+    .contact-row { grid-template-columns: 1fr; }
+    .contact-submit { width: 100%; }
+  }
+</style>

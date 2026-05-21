@@ -881,6 +881,7 @@ html[data-blog-cluster="migrations"] .blog-filter[data-cluster="migrations"] {
 }
 .final-cta .sec-eyebrow { margin-bottom: 12px; }
 .final-cta h3 { font-size: 32px; line-height: 1.1; letter-spacing: -0.02em; font-weight: 600; margin: 0 0 12px; position: relative; }
+.final-cta-duration { white-space: nowrap; }
 .final-cta p { color: var(--fg-mute); margin: 0; font-size: 15px; position: relative; max-width: 540px; }
 .final-cta .actions { display: flex; gap: 10px; position: relative; }
 
