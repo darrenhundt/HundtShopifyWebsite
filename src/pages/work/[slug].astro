@@ -25,6 +25,7 @@ const {
   stats,
   engagement,
   shipped,
+  heroImage,
   imageCaption,
 } = entry.data;
 
@@ -73,17 +74,29 @@ const heroStats = [
           <p class="cs-p">{problem}</p>
         </div>
 
-        <div
-          class="cs-shot ph"
-          role="img"
-          aria-label={`${title} — screenshot placeholder`}
-        >
-          <div class="ph-tag">screenshot · hero</div>
-          <div class="ph-caption">
-            <span>{imageCaption ?? `${slug}-hero.png`}</span>
-            <span>16:9</span>
+        {heroImage ? (
+          <div class="cs-shot">
+            <img
+              class="cs-shot-media"
+              src={heroImage}
+              alt={`${title} case study screenshot`}
+              loading="eager"
+              decoding="async"
+            />
           </div>
-        </div>
+        ) : (
+          <div
+            class="cs-shot ph"
+            role="img"
+            aria-label={`${title} — screenshot placeholder`}
+          >
+            <div class="ph-tag">screenshot · hero</div>
+            <div class="ph-caption">
+              <span>{imageCaption ?? `${slug}-hero.png`}</span>
+              <span>16:9</span>
+            </div>
+          </div>
+        )}
 
         <div class="cs-section">
           <h2 class="cs-h2">What I actually changed</h2>

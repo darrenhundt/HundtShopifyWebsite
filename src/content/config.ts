@@ -35,6 +35,7 @@ export const collections = {
       order: z.number().optional(),
       engagement: z.string().optional(),
       shipped: z.string().optional(),
+      heroImage: z.string().optional(),
       imageCaption: z.string().optional(),
     }),
   }),

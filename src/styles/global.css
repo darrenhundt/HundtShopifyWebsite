@@ -327,6 +327,12 @@ body::before {
   display: grid; place-items: center;
   overflow: hidden;
 }
+.case-thumb-media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .case-thumb-label {
   position: absolute; bottom: 12px; left: 14px;
   font-family: var(--mono); font-size: 10.5px; color: var(--fg-dim);
@@ -807,6 +813,12 @@ html[data-blog-cluster="migrations"] .blog-filter[data-cluster="migrations"] {
   margin: 20px 0;
   position: relative;
   overflow: hidden;
+}
+.cs-shot-media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .cs-shot-label {
   position: absolute; bottom: 12px; left: 14px;

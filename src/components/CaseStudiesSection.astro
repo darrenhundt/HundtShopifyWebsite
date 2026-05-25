@@ -28,12 +28,24 @@ Read: ${siteOrigin}/work/${slug}`;
         return (
           <article class="case-card">
 
-            <div class="case-thumb ph" role="img" aria-label={`${c.title} — hero image placeholder`}>
-              <div class="ph-caption">
-                <span>{c.imageCaption ?? `${slug}-hero.png`}</span>
-                <span>{c.stack.slice(0, 2).join(" · ")}</span>
+            {c.heroImage ? (
+              <div class="case-thumb">
+                <img
+                  class="case-thumb-media"
+                  src={c.heroImage}
+                  alt={`${c.title} case study screenshot`}
+                  loading={ci === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                />
               </div>
-            </div>
+            ) : (
+              <div class="case-thumb ph" role="img" aria-label={`${c.title} — hero image placeholder`}>
+                <div class="ph-caption">
+                  <span>{c.imageCaption ?? `${slug}-hero.png`}</span>
+                  <span>{c.stack.slice(0, 2).join(" · ")}</span>
+                </div>
+              </div>
+            )}
 
             <div class="case-body">
               <div class="case-title">{c.title}</div>
