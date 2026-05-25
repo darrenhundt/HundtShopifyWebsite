@@ -1,25 +1,25 @@
 ---
 const testimonials = [
   {
-    avatar: "TK",
-    name:   "[Name]",
-    role:   "[Title] · TKEES",
+    avatar: "SS",
+    name:   "Sara Sortzi",
+    role:   "Sequel Supplements",
     quote:
-      "Darren found the Klaviyo issue that had been missed for months. Fixed the same week. First developer who explained what was actually wrong in plain English.",
+      "Darren was great! I'd give more than 5 stars if I could. Great communicator and very quick with my needed changes. Would recommend and hire again!",
   },
   {
-    avatar: "CC",
-    name:   "[Name]",
-    role:   "[Title] · Copper Cow Coffee",
+    avatar: "AG",
+    name:   "Anthony Gucciardi",
+    role:   "President · Of The Ancients",
     quote:
-      "He rebuilt our subscription carousel feature and handled the full ADA audit at the same time. Clean code, no hand-holding, done when he said it would be done.",
+      "Darren is excellent, highly recommend working with him. His work is done with a high quality standard, and professionally. A pleasure to communicate with, and goes above and beyond. 100% you should hire Darren for your next project.",
   },
   {
-    avatar: "OA",
-    name:   "[Name]",
-    role:   "[Title] · Of The Ancients",
+    avatar: "SM",
+    name:   "Shawn Moreau",
+    role:   "Owner · Beard Coalition",
     quote:
-      "We needed a Replo page rebuilt in native Shopify. Darren delivered it fast and our PageSpeed score jumped significantly. No agency, no middleman, just the work.",
+      "He thinks strategically and was able to filter through what I thought I needed and got down to the crux of my issue. He finished in even less time than he thought and billed me fairly. HIGHLY recommend rking with Darren.",
   },
 ];
 ---
@@ -39,12 +39,10 @@ const testimonials = [
     <div class="t-grid">
       {testimonials.map((t) => (
         <article class="t-card">
-          {/* ⚠️ PLACEHOLDER — replace quote with real client testimonial before launch (SEED_CONTENT.md) */}
           <div class="t-quote">{t.quote}</div>
           <div class="t-author">
             <div class="t-avatar" aria-hidden="true">{t.avatar}</div>
             <div>
-              {/* ⚠️ PLACEHOLDER — replace [Name] and [Title] with permissioned attribution */}
               <div class="t-name">{t.name}</div>
               <div class="t-role">{t.role}</div>
             </div>
