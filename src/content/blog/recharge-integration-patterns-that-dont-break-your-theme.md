@@ -12,4 +12,11 @@ tags:
 draft: false
 ---
 
-Full tutorial coming soon. In the meantime, [get in touch](/#contact) if you're working through a ReCharge integration or migration.
+ReCharge integrations go wrong in predictable ways — cart drawer 
+conflicts, widget injection timing, subscription state not 
+reflecting on the PDP. I've worked through most of them.
+
+Writing this up properly takes time I'm currently spending on 
+client work. If you're mid-integration and hitting something 
+weird, reach out. Chances are I've untangled the same thing 
+recently.

@@ -12,4 +12,10 @@ tags:
 draft: false
 ---
 
-Full tutorial coming soon. In the meantime, [get in touch](/#contact) if you're evaluating a native bundles migration.
+Cart Transform Functions are underused. Most stores reach for 
+a bundles app when a native Function would be faster, cheaper, 
+and easier to maintain long-term.
+
+Full tutorial coming. If you're evaluating whether to pull out 
+a bundles app or build something native, I'm happy to give you 
+a straight answer before you commit her path.

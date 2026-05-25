@@ -12,4 +12,11 @@ tags:
 draft: false
 ---
 
-Full tutorial coming soon. In the meantime, [get in touch](//#contact) if you're dealing with render-blocking scripts on your Shopify store.
+This one comes up on almost every store I audit. Third-party 
+scripts — Klaviyo, Meta Pixel, GTM, chat widgets — loaded 
+synchronously and tanking LCP before a single product image 
+renders.
+
+The full writeup is in progress. If you're staring at a 
+Lighthouse score that won't budge no matter what you try, 
+get in touch. I've probably seen your exact script stack before.
