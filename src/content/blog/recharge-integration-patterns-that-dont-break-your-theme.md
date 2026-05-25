@@ -3,7 +3,7 @@ title: ReCharge integration patterns that don't break your theme
 description: >-
   Theme-safe ReCharge hooks, subscription cart flows, and migration patterns
   that avoid the breakage agencies usually leave behind.
-publishDate: 2026-03-15
+publishDate: 2026-05-18
 cluster: migrations
 tags:
   - recharge

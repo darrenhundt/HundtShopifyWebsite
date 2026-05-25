@@ -3,7 +3,7 @@ title: Killing render-blocking apps without losing analytics
 description: >-
   How to audit third-party scripts on Shopify 2.0 themes, defer what you can,
   and keep Klaviyo, GTM, and Meta events firing reliably.
-publishDate: 2026-03-01
+publishDate: 2026-05-04
 cluster: performance
 tags:
   - performance
