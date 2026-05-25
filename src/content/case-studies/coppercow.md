@@ -28,5 +28,6 @@ stats:
   - k: Accessibility fixes
     v: 150+
     sub: across 32 theme files
-imageCaption: coppercow-hero.png
+heroImage: /work/coppercow-hero.jpg
+imageCaption: coppercow-hero.jpg
 ---
