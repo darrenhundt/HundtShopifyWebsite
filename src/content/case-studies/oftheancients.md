@@ -21,8 +21,7 @@ stats:
     v: Eliminated
     highlight: up
   - k: PageSpeed
-    v: Improved
-    sub: full audit + targeted fixes
+    v: +20 pts
   - k: Sections
     v: Native only
 heroImage: /work/oftheancients-hero.png
