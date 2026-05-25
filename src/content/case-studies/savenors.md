@@ -19,5 +19,6 @@ stats:
     v: Active
   - k: Developer access
     v: Direct
-imageCaption: savenors-hero.png
+heroImage: /work/savenors-hero.jpg
+imageCaption: savenors-hero.jpg
 ---

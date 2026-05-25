@@ -25,5 +25,6 @@ stats:
     sub: full audit + targeted fixes
   - k: Sections
     v: Native only
-imageCaption: oftheancients-hero.png
+heroImage: /work/oftheancients-hero.jpg
+imageCaption: oftheancients-hero.jpg
 ---
