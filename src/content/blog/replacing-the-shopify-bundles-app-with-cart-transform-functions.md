@@ -1,5 +1,6 @@
 ---
 title: Replacing the Shopify Bundles app with Cart Transform Functions
+seoTitle: "Replace Shopify Bundles App with Cart Transform Functions"
 description: >-
   When Cart Transform Functions beat another subscription or bundles app, and
   how to scope a native Liquid + Functions migration on Shopify.

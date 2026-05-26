@@ -14,6 +14,7 @@ export const collections = {
     type: "content",
     schema: z.object({
       title: z.string(),
+      seoTitle: z.string().optional(),
       description: z.string(),
       publishDate: z.coerce.date(),
       cluster: blogCluster,
@@ -26,6 +27,7 @@ export const collections = {
     type: "content",
     schema: z.object({
       title: z.string(),
+      description: z.string().optional(),
       clientUrl: z.string(),
       stack: z.array(z.string()),
       status: z.string(),

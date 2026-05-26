@@ -17,6 +17,7 @@ interface Props {
 const { entry } = Astro.props;
 const {
   title,
+  description,
   clientUrl,
   stack,
   status,
@@ -40,7 +41,7 @@ const heroStats = [
 ];
 ---
 
-<Base title={`${title} · Darren Hundt`} description={technicalWin}>
+<Base title={`${title} · Darren Hundt`} description={description ?? technicalWin}>
   <section class="cs-hero">
     <div class="container-wide">
       <nav class="cs-crumbs" aria-label="Breadcrumb">

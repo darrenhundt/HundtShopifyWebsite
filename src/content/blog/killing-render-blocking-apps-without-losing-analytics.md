@@ -1,5 +1,6 @@
 ---
 title: Killing render-blocking apps without losing analytics
+seoTitle: "Defer Third-Party Scripts on Shopify Without Breaking Analytics"
 description: >-
   How to audit third-party scripts on Shopify 2.0 themes, defer what you can,
   and keep Klaviyo, GTM, and Meta events firing reliably.

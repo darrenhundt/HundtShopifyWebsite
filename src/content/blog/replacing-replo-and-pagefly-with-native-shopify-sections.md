@@ -1,5 +1,6 @@
 ---
 title: Replacing Replo and PageFly with native Shopify sections
+seoTitle: "Replace Replo and PageFly with Native Shopify Sections"
 description: How to migrate high-traffic landing pages off third-party page builders and into native Shopify sections — without losing flexibility or visual fidelity.
 publishDate: 2026-05-25
 cluster: migrations

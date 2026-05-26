@@ -1,5 +1,6 @@
 ---
 title: Savenor's Butcher · ongoing maintenance and design
+description: "Ongoing theme maintenance and design for an established specialty food brand. Direct developer access, no agency overhead, no handoff lag."
 clientUrl: savenorsbutchery.com
 stack:
   - Liquid

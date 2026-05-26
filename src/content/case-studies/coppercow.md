@@ -1,5 +1,6 @@
 ---
 title: Copper Cow Coffee · subscription feature and ADA overhaul
+description: "Built a custom subscription quick-add into product carousels with frequency options. Full WCAG 2.1 AA accessibility overhaul across the theme."
 clientUrl: coppercowcoffee.com
 stack:
   - Liquid

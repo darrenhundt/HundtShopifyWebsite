@@ -1,5 +1,6 @@
 ---
 title: TKEES · ongoing performance and maintenance
+description: "Diagnosed a Klaviyo defer race condition causing duplicate SDK load page. Restored clean event tracking. Ongoing retainer for a premium global footwear brand."
 clientUrl: tkees.com
 stack:
   - Liquid

@@ -6,9 +6,39 @@ import ProcessSection from "@/components/ProcessSection.astro";
 import ClustersSection from "@/components/ClustersSection.astro";
 import TestimonialsSection from "@/components/TestimonialsSection.astro";
 import FinalCTASection from "@/components/FinalCTASection.astro";
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Darren Hundt · Shopify Engineer",
+  "url": "https://darrenhundt.dev",
+  "description": "Solo Shopify engineer specializing in performance, ADA compliance, and custom Liquid development for DTC brands.",
+  "areaServed": "US",
+  "address": {
+    "@type": "PostalAddress",
+    "addressRegion": "TX",
+    "addressCountry": "US"
+  },
+  "knowsAbout": [
+    "Shopify theme development",
+    "Shopify Liquid",
+    "Core Web Vitals optimization",
+    "WCAG 2.1 ADA compliance",
+    "ReCharge subscriptions",
+    "Cart Transform Functions"
+  ],
+  "sameAs": [
+    "https://github.com/darrenhundt",
+    "https://www.upwork.com/freelancers/~0127e4d5909da97cac"
+  ]
+});
 ---
 
-<Base title="Darren Hundt · Shopify engineer · North Texas">
+<Base
+  title="Darren Hundt · Shopify Engineer · North Texas"
+  description="Solo Shopify engineer in North Texas. Performance, ADA compliance, and custom Liquid — delivered directly by the engineer writing the code."
+  schema={schema}
+>
   <Hero />
   <CaseStudiesSection />
   <ProcessSection />

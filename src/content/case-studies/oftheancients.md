@@ -1,5 +1,6 @@
 ---
 title: Of The Ancients · performance audit and native rebuild
+description: "Rebuilt a high-traffic Replo landing page using native Shopify sections only. Eliminated the page builder dependency and recovered 20+ PageSpeed points."
 clientUrl: oftheancients.com
 stack:
   - Liquid

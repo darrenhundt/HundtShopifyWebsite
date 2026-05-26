@@ -26,7 +26,7 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { title, description, publishDate, cluster, tags, readMinutes } =
+const { title, seoTitle, description, publishDate, cluster, tags, readMinutes } =
   entry.data;
 
 const published = await getPublishedPosts();
@@ -36,11 +36,38 @@ const minutes = readMinutes ?? estimateReadMinutes(entry.body);
 const { Content, headings } = await entry.render();
 
 const hubBackHref = clusterFilterHref(cluster);
+const siteUrl = "https://darrenhundt.dev";
+const articleUrl = `${siteUrl}/blog/${entry.slug}`;
+const iso = publishDate.toISOString();
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": title,
+  "description": description,
+  "proficiencyLevel": "Expert",
+  "dependencies": "Shopify Liquid, Shopify Functions, JavaScript",
+  "author": {
+    "@type": "Person",
+    "name": "Darren Hundt",
+    "url": siteUrl,
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Darren Hundt",
+    "url": siteUrl,
+  },
+  "datePublished": iso,
+  "dateModified": iso,
+  "url": articleUrl,
+});
 ---
 
 <Base
-  title={`${title} · Darren Hundt`}
+  title={`${seoTitle ?? title} · Darren Hundt`}
   description={description}
+  ogType="article"
+  schema={schema}
 >
   <section class="container blog-article-wrap">
     <div class="tut-layout">
@@ -88,7 +115,7 @@ const hubBackHref = clusterFilterHref(cluster);
         <div class="tut-callout">
           <div class="ic" aria-hidden="true">→</div>
           <div>
-            <h4>Need this implemented on your store?</h4>
+            <p class="tut-callout-h">Need this implemented on your store?</p>
             <p>
               I handle performance, Liquid, and integration work as a solo developer in
               North Texas — fixed bid, free Loom audit first, direct access to the person

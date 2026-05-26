@@ -9,13 +9,21 @@ interface Props {
   title: string;
   description?: string;
   noindex?: boolean;
+  ogType?: "website" | "article";
+  schema?: string;
 }
 
 const {
   title,
-  description = "Solo Shopify engineer · North Texas · Performance, ADA, and custom Liquid.",
+  description = "Solo Shopify engineer in North Texas. Performance, ADA compliance, and custom Liquid — delivered directly by the engineer writing the code.",
   noindex = false,
+  ogType = "website",
+  schema,
 } = Astro.props;
+
+const siteUrl = Astro.site?.href?.replace(/\/$/, "") ?? "https://darrenhundt.dev";
+const canonicalURL =
+  siteUrl + (Astro.url.pathname === "/" ? "" : Astro.url.pathname.replace(/\/$/, ""));
 ---
 
 <!doctype html>
@@ -26,6 +34,26 @@ const {
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex,nofollow" />}
     <title>{title}</title>
+
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:image" content={`${siteUrl}/og-default.jpeg`} />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}/og-default.jpeg`} />
+
+    <!-- JSON-LD schema -->
+    {schema && <script type="application/ld+json" set:html={schema} />}
+
+    <!-- favicon.svg — asset pending, do not remove reference -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
