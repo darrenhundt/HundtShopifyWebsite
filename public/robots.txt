@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://darrenhundt.dev/sitemap.xml
+Sitemap: https://darrenhundt.dev/sitemap-index.xml
