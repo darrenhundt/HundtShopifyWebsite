@@ -27,6 +27,6 @@ stats:
   - k: Engagement
     v: Ongoing retainer
     sub: active maintenance
-heroImage: /work/tkees-hero.jpg
+heroImage: /work/tkees-hero.webp
 imageCaption: tkees-hero.jpg
 ---

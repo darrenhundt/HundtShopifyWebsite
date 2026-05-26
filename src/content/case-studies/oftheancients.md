@@ -25,6 +25,6 @@ stats:
     v: +20 pts
   - k: Sections
     v: Native only
-heroImage: /work/oftheancients-hero.png
+heroImage: /work/oftheancients-hero.webp
 imageCaption: oftheancients-hero.png
 ---
