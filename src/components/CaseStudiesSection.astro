@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 
 const all = await getCollection("case-studies");
 const cases = all.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
-const siteOrigin = Astro.site?.href?.replace(/\/$/, "") ?? "https://darrenshopify.dev";
+const siteOrigin = Astro.site?.href?.replace(/\/$/, "") ?? "https://darrenhundt.dev";
 ---
 
 <section class="sec" id="work" aria-labelledby="work-heading">
