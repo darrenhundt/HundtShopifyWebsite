@@ -15,11 +15,17 @@ problem: |
 technicalWin: |
   Reverse-engineered the Skio plan picker to locate injectable CSS entry points inside the shadow root. Used `customElements.whenDefined` to append a constructed `CSSStyleSheet` directly into the shadow root after element registration — no forked Skio source required for styling. Added a `MutationObserver` fallback to reapply the sheet on dynamic re-renders and guard against future Skio JS updates silently wiping injected styles. Patched Skio's JS source separately to strip `/mo` from subscription price display, swap `SAVE $X` badge copy to `X% OFF`, reformat per-serving text, and calculate dynamic discount percentages from `compare_at_price` vs `price` for the one-time purchase card. Variant-aware perks list switching for 30-serving vs 60-serving SKUs wired through Liquid global settings — no hardcoded values where customizer controls were available.
 stats:
-  - "Skio declined the work — shipped it anyway"
-  - "Shadow DOM styled via JS-injected constructed stylesheet"
-  - "MutationObserver fallback guards against future Skio JS updates"
-  - "0 third-party page builders"
-  - "Full pricing display patched: /mo removed, SAVE → % OFF, dynamic one-time badge"
+  - k: Skio said no
+    v: Shipped anyway
+    highlight: ok
+  - k: Shadow DOM
+    v: Styled via JS injection
+    highlight: up
+  - k: Page builders
+    v: "0"
+  - k: Pricing rewrites
+    v: "3"
+    sub: /mo, SAVE→% OFF, dynamic badge
 heroImage: ""
 imageCaption: ""
 ---
