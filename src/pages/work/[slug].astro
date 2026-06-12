@@ -104,14 +104,6 @@ const heroStats = [
           <p class="cs-p">{technicalWin}</p>
         </div>
 
-        <div class="cs-section">
-          <h2 class="cs-h2">Outcome</h2>
-          <p class="cs-p">
-            {stats
-              .map((s) => `${s.k}: ${s.v}${s.sub ? ` (${s.sub})` : ""}`)
-              .join(" · ")}
-          </p>
-        </div>
       </div>
 
       <aside class="cs-aside">

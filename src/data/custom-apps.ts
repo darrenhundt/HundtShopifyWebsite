@@ -8,7 +8,7 @@ export const SERVICE_CARDS: ServiceCard[] = [
   {
     n: "01",
     title: "Admin dashboards and audit tools",
-    body: "Custom panels inside your Shopify admin. Proge auditors, inventory flag dashboards, metafield managers, variant tools. Built for your workflow, not a generic use case.",
+    body: "Custom panels inside your Shopify admin. Product image auditors, inventory flag dashboards, metafield managers, variant tools. Built for your workflow, not a generic use case.",
   },
   {
     n: "02",
