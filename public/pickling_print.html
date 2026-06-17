@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pickling Reference</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; color: #1a1a1a; padding: 2rem; max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 22px; font-weight: 600; margin-bottom: 0.2rem; }
+  .subtitle { font-size: 12px; color: #999; margin-bottom: 2rem; }
+  .phase-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #bbb; margin: 1.75rem 0 0.6rem; border-top: 0.5px solid #eee; padding-top: 1rem; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+  .card { background: #fff; border: 0.5px solid #ddd; border-radius: 10px; padding: 0.9rem 1rem; break-inside: avoid; }
+  .card-title { font-size: 12px; font-weight: 600; color: #111; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 0.5px solid #eee; line-height: 1.4; }
+  .row { display: flex; gap: 8px; margin-bottom: 5px; align-items: flex-start; }
+  .row-label { font-size: 9px; color: #bbb; min-width: 58px; padding-top: 1px; flex-shrink: 0; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+  .row-val { font-size: 11px; color: #444; line-height: 1.5; }
+  .optional-note { font-size: 10px; color: #92400E; background: #FEF3E2; border-radius: 5px; padding: 4px 7px; margin-top: 6px; line-height: 1.5; }
+  .badges { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 7px; }
+  .badge { display: inline-block; font-size: 9px; font-weight: 600; padding: 2px 7px; border-radius: 20px; }
+  .badge-cold   { background: #E6F1FB; color: #0C447C; }
+  .badge-hot    { background: #FAECE7; color: #993C1D; }
+  .badge-oven   { background: #FEF3E2; color: #7A4A0A; }
+  .badge-fridge { background: #F1EFE8; color: #444441; }
+  .badge-wbc    { background: #EEEDFE; color: #3C3489; }
+  .badge-shelf  { background: #EAF3DE; color: #3B6D11; }
+  @media print {
+    body { padding: 1rem; }
+    .card { break-inside: avoid; }
+    .phase-label { break-before: auto; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Pickling reference</h1>
+<p class="subtitle">All batches — prep, brine, aromatics, storage &amp; shelf life</p>
+
+<!-- PHASE 1 -->
+<div class="phase-label">Phase 1 — Cold prep</div>
+<div class="grid">
+
+  <div class="card">
+    <div class="card-title">Small cucumbers &amp; slicing cucumbers</div>
+    <div class="row"><span class="row-label">Prep</span><span class="row-val">Wash. Slice slicers into rounds; leave small cukes whole or cut into spears. Trim blossom ends completely. Ice bath.</span></div>
+    <div class="badges"><span class="badge badge-cold">Cold prep</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Jalapeños &amp; mixed peppers</div>
+    <div class="row"><span class="row-label">Prep</span><span class="row-val">Wear gloves. Slice into uniform 1/4-inch rings or strips. Set aside in bowl.</span></div>
+    <div class="badges"><span class="badge badge-cold">Cold prep</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Sweet onions</div>
+    <div class="row"><span class="row-label">Prep</span><span class="row-val">Peel and thinly slice into half-moons. Set aside.</span></div>
+    <div class="badges"><span class="badge badge-cold">Cold prep</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Fresh okra</div>
+    <div class="row"><span class="row-label">Prep</span><span class="row-val">Wash thoroughly. Keep whole with stems attached to prevent sliminess.</span></div>
+    <div class="badges"><span class="badge badge-cold">Cold prep</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Green tomatoes</div>
+    <div class="row"><span class="row-label">Prep</span><span class="row-val">Wash. Slice into 1/4-inch rounds or wedges. Firm, unripe tomatoes only.</span></div>
+    <div class="badges"><span class="badge badge-cold">Cold prep</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Cucumbers — Szechuan</div>
+    <div class="row"><span class="row-label">Prep</span><span class="row-val">Wash. Smash whole with the flat of a knife, then tear into rough chunks. Salt and rest 15 min, pat dry.</span></div>
+    <div class="badges"><span class="badge badge-cold">Cold prep</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Daikon, carrots &amp; cucumbers — Bánh Mì</div>
+    <div class="row"><span class="row-label">Prep</span><span class="row-val">Peel daikon and carrots. Julienne or cut into thin matchsticks. Slice cucumbers into thin rounds. Salt all, rest 10 min, rinse and pat dry.</span></div>
+    <div class="badges"><span class="badge badge-cold">Cold prep</span></div>
+  </div>
+
+</div>
+
+<!-- PHASE 2 -->
+<div class="phase-label">Phase 2 — Hot prep</div>
+<div class="grid">
+
+  <div class="card">
+    <div class="card-title">Garden beets</div>
+    <div class="row"><span class="row-label">Prep</span><span class="row-val">Leave skins and roots on. Boil until tender. Cool in ice water, slip skins off with fingers, slice into wedges.</span></div>
+    <div class="badges"><span class="badge badge-hot">Hot prep</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Roasted jalapeños (oven / broil)</div>
+    <div class="row"><span class="row-label">Prep</span><span class="row-val">Leave whole. Place on a rack over a foil-lined sheet pan. Broil on high, 4-6 inches from element, turning once, until fully blistered and charred on both sides. About 8-12 minutes total. Do not peel. Cool slightly, then slice into rings or leave whole depending on use.</span></div>
+    <div class="row"><span class="row-label">Use for</span><span class="row-val">Roasted cowboy candy, or as an optional add-in (2-3 rings per pint jar) to any spicy cucumber recipe.</span></div>
+    <div class="badges"><span class="badge badge-oven">Oven / broil</span></div>
+  </div>
+
+</div>
+
+<!-- PHASE 3 -->
+<div class="phase-label">Phase 3 — Assembly &amp; brine</div>
+<div class="grid">
+
+  <div class="card">
+    <div class="card-title">Small cucumbers &amp; okra</div>
+    <div class="row"><span class="row-label">Pack</span><span class="row-val">Pack tightly and vertically into clean pint jars.</span></div>
+    <div class="row"><span class="row-label">Ratio</span><span class="row-val">1:1 — 3 cups acid : 3 cups water</span></div>
+    <div class="row"><span class="row-label">Brine</span><span class="row-val">Apple cider vinegar + 2 tbsp sugar + 3 tbsp salt</span></div>
+    <div class="row"><span class="row-label">Aromatics</span><span class="row-val">1 smashed garlic clove, 1 tsp dill seed, 1/2 tsp black peppercorns</span></div>
+    <div class="badges"><span class="badge badge-wbc">Water bath can (10 min) or fridge</span><span class="badge badge-shelf">1 year sealed / 2 months open</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Garden beets &amp; sweet onions</div>
+    <div class="row"><span class="row-label">Pack</span><span class="row-val">Beets in dedicated jars; sliced onions in separate jars.</span></div>
+    <div class="row"><span class="row-label">Ratio</span><span class="row-val">2:1 — 3 cups acid : 1.5 cups water</span></div>
+    <div class="row"><span class="row-label">Brine</span><span class="row-val">Apple cider vinegar + 1.5 cups sugar + 1 tbsp salt</span></div>
+    <div class="row"><span class="row-label">Aromatics</span><span class="row-val">1/2 tsp mustard seed, 1 whole clove, small pinch of allspice</span></div>
+    <div class="badges"><span class="badge badge-wbc">Water bath can (10 min) or fridge</span><span class="badge badge-shelf">1 year sealed / 2 months open</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Slicing cucumbers — honey mustard</div>
+    <div class="row"><span class="row-label">Pack</span><span class="row-val">Pull from ice bath, dry quickly, pack tightly into pint jars.</span></div>
+    <div class="row"><span class="row-label">Ratio</span><span class="row-val">3:1 — 1.5 cups acid : 0.5 cups water</span></div>
+    <div class="row"><span class="row-label">Brine</span><span class="row-val">White vinegar + 1/2 cup honey + 2 tbsp Dijon + 1 tbsp salt + 1/2 tsp turmeric</span></div>
+    <div class="row"><span class="row-label">Aromatics</span><span class="row-val">1/2 tsp yellow mustard seeds, 1 smashed garlic clove</span></div>
+    <div class="badges"><span class="badge badge-fridge">Refrigerator style (best for crunch)</span><span class="badge badge-shelf">Fridge: 2 months</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Jalapeños — cowboy candy (raw)</div>
+    <div class="row"><span class="row-label">Pack</span><span class="row-val">Boil slices directly in brine for exactly 4 minutes. Pack hot with slotted spoon.</span></div>
+    <div class="row"><span class="row-label">Ratio</span><span class="row-val">Pure acid — 1.5 cups : 0 water</span></div>
+    <div class="row"><span class="row-label">Brine</span><span class="row-val">Apple cider vinegar + 1.5 cups sugar + 1/2 tsp garlic powder</span></div>
+    <div class="row"><span class="row-label">Aromatics</span><span class="row-val">1/4 tsp celery seed</span></div>
+    <div class="badges"><span class="badge badge-fridge">Refrigerator style</span><span class="badge badge-shelf">Fridge: 3 months (high sugar preserves)</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Jalapeños — cowboy candy (roasted)</div>
+    <div class="row"><span class="row-label">Pack</span><span class="row-val">Broil jalapeños whole until fully blistered. Slice into rings skin-on. Add to jars. Pour hot brine over immediately.</span></div>
+    <div class="row"><span class="row-label">Ratio</span><span class="row-val">Pure acid — 1.5 cups : 0 water</span></div>
+    <div class="row"><span class="row-label">Brine</span><span class="row-val">Apple cider vinegar + 1.5 cups sugar + 1/2 tsp garlic powder + 1 tsp smoked paprika</span></div>
+    <div class="row"><span class="row-label">Aromatics</span><span class="row-val">1/4 tsp celery seed, 1/4 tsp cumin</span></div>
+    <div class="row"><span class="row-label">Note</span><span class="row-val">Softer texture than raw-pack. Smoked paprika bridges the gap on smoke flavor.</span></div>
+    <div class="badges"><span class="badge badge-fridge">Refrigerator style</span><span class="badge badge-shelf">Fridge: 3 months</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Szechuan cucumbers</div>
+    <div class="row"><span class="row-label">Pack</span><span class="row-val">Pack smashed cucumber chunks loosely into jars. Sesame oil is a finishing drizzle only, not in the brine.</span></div>
+    <div class="row"><span class="row-label">Ratio</span><span class="row-val">1:1 — 1 cup acid : 1 cup water</span></div>
+    <div class="row"><span class="row-label">Brine</span><span class="row-val">Rice vinegar + 1 tbsp soy sauce + 1 tbsp sugar + 1 tsp salt + 1 tsp chili oil</span></div>
+    <div class="row"><span class="row-label">Aromatics</span><span class="row-val">1 tsp Szechuan peppercorns, 2 dried red chilies, 2 smashed garlic cloves</span></div>
+    <div class="row"><span class="row-label">Finish</span><span class="row-val">Drizzle 1/2 tsp toasted sesame oil per jar before serving.</span></div>
+    <div class="optional-note">Optional: add 2-3 roasted jalapeño rings per jar for deeper heat.</div>
+    <div class="badges"><span class="badge badge-fridge">Refrigerator style</span><span class="badge badge-shelf">Fridge: 3 weeks (best at 48 hrs)</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Habanero garlic cucumbers</div>
+    <div class="row"><span class="row-label">Pack</span><span class="row-val">Pack cucumber spears vertically. Add whole habaneros between spears.</span></div>
+    <div class="row"><span class="row-label">Ratio</span><span class="row-val">1:1 — 2 cups acid : 2 cups water</span></div>
+    <div class="row"><span class="row-label">Brine</span><span class="row-val">White vinegar + 1 tbsp sugar + 2 tbsp salt</span></div>
+    <div class="row"><span class="row-label">Aromatics</span><span class="row-val">4 smashed garlic cloves, 2 whole habaneros per jar, 1/2 tsp black peppercorns</span></div>
+    <div class="optional-note">Optional: add 2-3 roasted jalapeño rings per jar for layered heat.</div>
+    <div class="badges"><span class="badge badge-wbc">Water bath can (10 min) or fridge</span><span class="badge badge-shelf">1 year sealed / 2 months open</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Dill &amp; coriander seed cucumbers</div>
+    <div class="row"><span class="row-label">Pack</span><span class="row-val">Pack spears or rounds tightly and vertically into pint jars.</span></div>
+    <div class="row"><span class="row-label">Ratio</span><span class="row-val">1:1 — 3 cups acid : 3 cups water</span></div>
+    <div class="row"><span class="row-label">Brine</span><span class="row-val">Apple cider vinegar + 1 tbsp sugar + 3 tbsp salt</span></div>
+    <div class="row"><span class="row-label">Aromatics</span><span class="row-val">1 tsp dill seed, 1 tsp whole coriander seed, 1 smashed garlic clove, 1/4 tsp red pepper flakes</span></div>
+    <div class="optional-note">Optional: add 2-3 roasted jalapeño rings per jar for charred heat against the bright dill.</div>
+    <div class="badges"><span class="badge badge-wbc">Water bath can (10 min) or fridge</span><span class="badge badge-shelf">1 year sealed / 2 months open</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Green tomatoes</div>
+    <div class="row"><span class="row-label">Pack</span><span class="row-val">Pack rounds or wedges firmly into pint jars.</span></div>
+    <div class="row"><span class="row-label">Ratio</span><span class="row-val">1:1 — 2 cups acid : 2 cups water</span></div>
+    <div class="row"><span class="row-label">Brine</span><span class="row-val">Apple cider vinegar + 1 tbsp sugar + 2 tbsp salt</span></div>
+    <div class="row"><span class="row-label">Aromatics</span><span class="row-val">1 smashed garlic clove, 1/2 tsp red pepper flakes, 1/2 tsp mustard seed, fresh dill sprig</span></div>
+    <div class="optional-note">Optional: add 2-3 roasted jalapeño rings per jar for a Southern-style spicy kick.</div>
+    <div class="badges"><span class="badge badge-wbc">Water bath can (10 min) or fridge</span><span class="badge badge-shelf">1 year sealed / 2 months open</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Bánh Mì — daikon, carrot &amp; cucumber</div>
+    <div class="row"><span class="row-label">Pack</span><span class="row-val">Pack matchsticks and rounds loosely. Tuck lemongrass and cilantro stems along the sides of each jar.</span></div>
+    <div class="row"><span class="row-label">Ratio</span><span class="row-val">Pure acid — 2 cups : 0 water</span></div>
+    <div class="row"><span class="row-label">Brine</span><span class="row-val">Rice vinegar + 4 tbsp white sugar + 1 tsp salt</span></div>
+    <div class="row"><span class="row-label">Aromatics</span><span class="row-val">1 smashed lemongrass stalk, 4-5 fresh cilantro stems, 3-4 thin jalapeño or bird's eye chili slices</span></div>
+    <div class="badges"><span class="badge badge-fridge">Refrigerator style</span><span class="badge badge-shelf">Fridge: 3 weeks (best at 24 hrs)</span></div>
+  </div>
+
+</div>
+</body>
+</html>
